@@ -2,7 +2,20 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
    http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   
+
+<organization>
+	<name>Babes-Bolyai University</name>
+	<url> www.cs.ubbcluj.ro </url>
+</organization>
+<developers>
+	<developer>
+		<name> Fejlesztő neve </name>
+		<email>fejlesztő email címe</email>
+		<organization> Babes-Bolyai University </organization>
+		<organizationUrl> http://cs.ubbcluj.ro </organizationUrl>
+	</developer>
+</developers>
+  
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.ubb.cs.idde</groupId>
   <artifactId>lab2-ktim1347_lab2</artifactId>
