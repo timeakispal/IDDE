@@ -41,7 +41,7 @@ public class Kliens extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
         panel.removeAll();
         
-        Locale currentLocale = new Locale("hu");
+        Locale currentLocale = new Locale("en");
 		ResourceBundle messages;
 		messages = ResourceBundle.getBundle("ApplicationResources",currentLocale);
         GenericDao<States> dao2 = new GenericJdbcDao<States>(States.class);

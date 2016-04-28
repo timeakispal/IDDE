@@ -33,18 +33,17 @@ public class GenericJdbcDao<T> implements GenericDao<T> {
 	public List<T> getAllDataRows() {
 		List<T> results ;
 		ResultSet r;
-                String user,password;
-                user = PropertyLoader.getProperty("username");
-                password = PropertyLoader.getProperty("password");
+        String user,password;
+        user = PropertyLoader.getProperty("username");
+        password = PropertyLoader.getProperty("password");
 		try{
         	Connection connect = DriverManager.getConnection(connectionString,user,password);
         	Statement statement = connect.createStatement();
-        	 r = statement.executeQuery("SELECT * FROM "+persistentClass.getSimpleName());
-        	 results= createObjects(r);
-        	 connect.close();
-//         	Method m = persistentClass.getMethod("toString");
-
-        	 return results;
+			r = statement.executeQuery("SELECT * FROM "+persistentClass.getSimpleName());
+			results= createObjects(r);
+			connect.close();
+			
+			return results;
         	
 		} 
 		catch ( Exception e  ) { 
@@ -71,33 +70,23 @@ public class GenericJdbcDao<T> implements GenericDao<T> {
 	{
 
 		List<T> list = new ArrayList<T>();
-
 		while (resultSet.next()) {
 
 			T instance = persistentClass.newInstance();
-
 			for (Field field : persistentClass.getDeclaredFields()) {
 
 				Object value = resultSet.getObject(field.getName());
-//				Object value = new String("123");
-
-				PropertyDescriptor propertyDescriptor = new PropertyDescriptor(
-						field.getName(), persistentClass);
-
+				PropertyDescriptor propertyDescriptor = new PropertyDescriptor(field.getName(), persistentClass);
 				Method method = propertyDescriptor.getWriteMethod();
 				Class<?> type = method.getParameterTypes()[0];
 				
 				if ( type == int.class ) {
-//					System.out.println("Field: "+ field.getName()+ " is an integer typed field");
-//					System.out.println(value);
 					method.invoke(instance, Integer.parseInt(value.toString()));
 					
 				} else {
-//					System.out.println("Field: "+ field.getName()+ " is a string typed field");
 					method.invoke(instance,value );
 				}
 			}
-
 			list.add(instance);
 		}
 		return list;
