@@ -1,9 +1,17 @@
 package edu.ubb.cs.idde.server.pojo;
 
+import javax.persistence.Column;  
+import javax.persistence.Entity;  
+import javax.persistence.Id;
+
+@Entity(name="states")
 public class States {
-	
+	 @Id
+	 @Column(name="id")
 	protected int id;
+	 @Column(name="state")
 	protected String state;
+	 @Column(name="population")
 	protected int population;
 	public States() {
 

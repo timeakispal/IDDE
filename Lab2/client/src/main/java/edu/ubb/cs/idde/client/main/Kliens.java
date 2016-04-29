@@ -4,8 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import edu.ubb.cs.idde.server.main.GenericDao;
-import edu.ubb.cs.idde.server.main.GenericJdbcDao;
+import edu.ubb.cs.idde.server.main.*;
 import edu.ubb.cs.idde.server.pojo.States;
 
 import java.beans.IntrospectionException;
@@ -19,16 +18,21 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-public class Kliens extends JFrame implements ActionListener{
+public class Kliens<T> extends JFrame implements ActionListener{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected Class<T> persistentClass;
 	JTable table;
-    JPanel panel = new JPanel();
-    JButton button = new JButton("Get States");
+    JPanel panel;
+    JButton button;
 
-    public Kliens(){
+    public Kliens(final Class<T> persistentClass) {
+    	this.persistentClass = persistentClass;
+    	
+    	panel = new JPanel();
+    	button = new JButton("Get " + this.persistentClass.getSimpleName());
         setLayout(new BorderLayout());
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setPreferredSize(new Dimension(1024,768));
@@ -44,9 +48,14 @@ public class Kliens extends JFrame implements ActionListener{
         Locale currentLocale = new Locale("en");
 		ResourceBundle messages;
 		messages = ResourceBundle.getBundle("ApplicationResources",currentLocale);
-        GenericDao<States> dao2 = new GenericJdbcDao<States>(States.class);
-        List<States> l2 = dao2.getAllDataRows();
-    	Iterator<States> i2 = l2.listIterator();
+		GenericDao<T> dao2 = null;
+		// det data with JDBC
+//		dao2 = new JdbcDao<T>(persistentClass);
+        // get data with HIBERNATE
+        dao2 = new HibernateDao<T>(persistentClass);
+        
+        List<T> l2 = dao2.getAllDataRows();
+    	Iterator<T> i2 = l2.listIterator();
     	
     	Vector<String> columnNames = new Vector<String>();
     	for (Field field : l2.get(0).getClass().getDeclaredFields()) {
@@ -57,7 +66,7 @@ public class Kliens extends JFrame implements ActionListener{
 
 		while( i2.hasNext())
     	{
-    		States c = i2.next();
+    		T c = i2.next();
     		Vector<Object> row = new Vector<Object>();
     		for (Field field : c.getClass().getDeclaredFields()) {
 				PropertyDescriptor propertyDescriptor;
@@ -66,19 +75,15 @@ public class Kliens extends JFrame implements ActionListener{
     				Method method = propertyDescriptor.getReadMethod();
     				
     				row.add(method.invoke(c));
-    				System.out.println(messages.getString(field.getName())+" = "+ method.invoke(c));
+//    				System.out.println(messages.getString(field.getName())+" = "+ method.invoke(c));
 
 				} catch (IntrospectionException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -92,10 +97,10 @@ public class Kliens extends JFrame implements ActionListener{
     }
 
     public static void main(String [] a){
-    	// TODO Auto-generated method stub
-        Kliens s = new Kliens();
+        Kliens<States> s = new Kliens<States>(States.class);
         s.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         s.pack();
         s.setVisible(true);
+        
     }
 }

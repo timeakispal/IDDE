@@ -8,8 +8,19 @@
   <artifactId>lab2-ktim1347_client</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <configuration>
+              <mainClass>edu.ubb.cs.idde.client.main.Kliens</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
 
-<dependencies>
+  <dependencies>
     <dependency>
       <groupId>edu.ubb.cs.idde</groupId>
       <artifactId>lab2-ktim1347_server</artifactId>

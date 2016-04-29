@@ -13,12 +13,12 @@ import java.util.List;
 import edu.ubb.cs.idde.server.util.PropertyLoader;
 
 
-public class GenericJdbcDao<T> implements GenericDao<T> {
+public class JdbcDao<T> implements GenericDao<T> {
 
 	private Class<T> persistentClass;
 	private String connectionString;
 	
-	public GenericJdbcDao(final Class<T> persistentClass){
+	public JdbcDao(final Class<T> persistentClass){
 		this.persistentClass = persistentClass;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class GenericJdbcDao<T> implements GenericDao<T> {
 		try{
         	Connection connect = DriverManager.getConnection(connectionString,user,password);
         	Statement statement = connect.createStatement();
-			r = statement.executeQuery("SELECT * FROM "+persistentClass.getSimpleName());
+			r = statement.executeQuery("SELECT * FROM "+persistentClass.getSimpleName().toLowerCase());
 			results= createObjects(r);
 			connect.close();
 			

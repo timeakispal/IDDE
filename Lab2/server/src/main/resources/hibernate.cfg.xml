@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?> <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>  
+  
+    <session-factory>  
+  
+        <property name="hibernate.dialect">
+      		org.hibernate.dialect.MySQLDialect
+   		</property>
+   		<property name="hibernate.connection.driver_class">
+      		com.mysql.jdbc.Driver
+   		</property>
+
+   		<!-- Assume test is the database name -->
+   		<property name="hibernate.connection.url">
+      		jdbc:mysql://localhost/test
+   		</property>
+   		<property name="hibernate.connection.username">
+      		timi
+   		</property>
+   		<property name="hibernate.connection.password">
+      		1234
+   		</property> 
+  
+        <!-- JDBC connection pool (use the built-in) -->  
+        <property name="connection.pool_size">1</property>  
+  
+        <!-- SQL dialect -->  
+        <property name="dialect">org.hibernate.dialect.SQLServer2005Dialect</property>  
+  
+        <!-- Echo all executed SQL to stdout -->  
+        <property name="show_sql">true</property>  
+  
+        <!-- Drop and re-create the database schema on startup -->  
+        <!-- <property name="hbm2ddl.auto">create</property> -->  
+  
+  		<property name="mappingJarLocations">file:**/lab2-ktim1347_server.jar</property>
+  		<mapping package="edu.ubb.cs.idde.server.pojo"/>
+		<mapping class="edu.ubb.cs.idde.server.pojo.States"/>
+  
+    </session-factory>  
+  
+</hibernate-configuration>

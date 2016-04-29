@@ -3,31 +3,49 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
    http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-<organization>
-	<name>Babes-Bolyai University</name>
-	<url> www.cs.ubbcluj.ro </url>
-</organization>
-<developers>
-	<developer>
-		<name> Fejlesztő neve </name>
-		<email>fejlesztő email címe</email>
-		<organization> Babes-Bolyai University </organization>
-		<organizationUrl> http://cs.ubbcluj.ro </organizationUrl>
-	</developer>
-</developers>
+  <organization>
+  	<name>Babes-Bolyai University</name>
+  	<url> www.cs.ubbcluj.ro </url>
+  </organization>
+  <developers>
+  	<developer>
+  		<name> Kispal Timea </name>
+  		<email>ktim1347@scs.ubbcluj.ro</email>
+  		<organization> Babes-Bolyai University </organization>
+  		<organizationUrl> http://cs.ubbcluj.ro </organizationUrl>
+  	</developer>
+  </developers>
   
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.ubb.cs.idde</groupId>
   <artifactId>lab2-ktim1347_lab2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
+  <packaging>pom</packaging>
+  <modules>
+     <module>client</module>
+     <module>server</module>
+  </modules>
 
-
-<packaging>pom</packaging>
-<modules>
-   <module>client</module>
-   <module>server</module>
-</modules>
+  <build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                 <execution>
+                     <phase>verify</phase>
+                     <goals>
+                         <goal>java</goal>
+                     </goals>
+                 </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
 
 
 </project>
