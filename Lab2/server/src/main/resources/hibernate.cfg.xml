@@ -28,13 +28,16 @@
         <property name="dialect">org.hibernate.dialect.SQLServer2005Dialect</property>  
   
         <!-- Echo all executed SQL to stdout -->  
-        <property name="show_sql">true</property>  
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
+		<property name="generate_statistics">false</property>
+		<property name="use_sql_comments">false</property>  
   
         <!-- Drop and re-create the database schema on startup -->  
         <!-- <property name="hbm2ddl.auto">create</property> -->  
   
   		<property name="mappingJarLocations">file:**/lab2-ktim1347_server.jar</property>
-  		<mapping package="edu.ubb.cs.idde.server.pojo"/>
+  		<!-- <mapping package="edu.ubb.cs.idde.server.pojo"/> -->
 		<mapping class="edu.ubb.cs.idde.server.pojo.States"/>
   
     </session-factory>  

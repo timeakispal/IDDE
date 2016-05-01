@@ -31,7 +31,6 @@ public class HibernateDao<T> implements GenericDao<T> {
 	    Transaction t = ss.beginTransaction();
 	    Query query = ss.createQuery("from " + persistentClass.getSimpleName().toLowerCase());
 	    List<T> list = query.list();
-//        System.out.println(list);
         t.commit();
         ss.close();
         
@@ -61,12 +60,10 @@ public class HibernateDao<T> implements GenericDao<T> {
 	}
 	@Override
 	public void updateObject(T obj) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	@Override
 	public void deleteObject(T obj) {
-		// TODO Auto-generated method stub
 		
 	}  
     

@@ -18,11 +18,16 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import org.slf4j.*;
+
+
+// mikor mvn exec:java -val futtatom akkor a szulo projekten futtatom a mvn installt es ezt pedig a client folderbol inditom
 public class Kliens<T> extends JFrame implements ActionListener{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LoggerFactory.getLogger(Kliens.class);
 	protected Class<T> persistentClass;
 	JTable table;
     JPanel panel;
@@ -30,7 +35,6 @@ public class Kliens<T> extends JFrame implements ActionListener{
 
     public Kliens(final Class<T> persistentClass) {
     	this.persistentClass = persistentClass;
-    	
     	panel = new JPanel();
     	button = new JButton("Get " + this.persistentClass.getSimpleName());
         setLayout(new BorderLayout());
@@ -73,10 +77,8 @@ public class Kliens<T> extends JFrame implements ActionListener{
 				try {
 					propertyDescriptor = new PropertyDescriptor(field.getName(), c.getClass());
     				Method method = propertyDescriptor.getReadMethod();
-    				
     				row.add(method.invoke(c));
-//    				System.out.println(messages.getString(field.getName())+" = "+ method.invoke(c));
-
+    				
 				} catch (IntrospectionException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
@@ -101,6 +103,13 @@ public class Kliens<T> extends JFrame implements ActionListener{
         s.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         s.pack();
         s.setVisible(true);
+        
+        logger.trace("Hello World!");
+    	String name = "Timea";
+    	logger.debug("Hi, {}", name);
+    	logger.info("Welcome to the HelloWorld example of Logback.");
+    	logger.warn("Dummy warning message.");
+    	logger.error("Dummy error message.");
         
     }
 }

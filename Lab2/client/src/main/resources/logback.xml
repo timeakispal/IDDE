@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>E:/Documents/Egyetem/3.ev/IDDE/IDDE/Lab2/mylog.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d [%thread] %-5level  %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+  <logger name="deng" level="DEBUG"/>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+  <root level="TRACE">
+        <appender-ref ref="fileAppender" />
+    </root>
+</configuration>
