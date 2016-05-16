@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <organization>
+  	<name>Babes-Bolyai University</name>
+  	<url> www.cs.ubbcluj.ro </url>
+	</organization>
+	<developers>
+		<developer>
+			<name> Kispal Timea </name>
+			<email>ktim1347@scs.ubbcluj.ro</email>
+			<organization> Babes-Bolyai University </organization>
+			<organizationUrl> http://cs.ubbcluj.ro </organizationUrl>
+		</developer>
+	</developers>
+
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>edu.ubb.cs.idde.osgi</groupId>
+    <artifactId>lab4-ktim1347_szulo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+         <karafdeploy>E:\Documents\Egyetem\3.ev\IDDE\apache-karaf-4.0.5\deploy\</karafdeploy>
+    </properties>
+
+    <modules>
+        <module>szolgaltatas_interface</module>
+        <module>szolgaltatas_implementacio</module>
+        <module>szolgaltatas_fogyaszto</module>
+    </modules>
+           
+
+</project>

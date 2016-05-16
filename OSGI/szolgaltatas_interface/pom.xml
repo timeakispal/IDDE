@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>edu.ubb.cs.idde.osgi</groupId>
+		<artifactId>lab4-ktim1347_szulo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>edu.ubb.cs.idde.osgi</groupId>
+	<artifactId>lab4-ktim1347_interface</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+
+	<name>lab4-ktim1347_interface Bundle</name>
+	<description>lab4-ktim1347_interface OSGi bundle project.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.4.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>edu.ubb.cs.idde.osgi.interfesz.Activator</Bundle-Activator>
+						<Export-Package>edu.ubb.cs.idde.osgi.interfesz*;version=${project.version}</Export-Package>
+						<Import-Package>*</Import-Package>
+					</instructions>
+				</configuration>
+
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id> copy-to-karaf</id>
+						<goals>
+							<goal>
+                                run
+                            </goal>
+						</goals>
+						<phase> install </phase>
+						<configuration>
+							<target name="karafdeploy">
+								<copy
+									file="${project.build.directory}/${project.build.finalName}.jar"
+									todir="${karafdeploy}" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

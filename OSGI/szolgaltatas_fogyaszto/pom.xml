@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>edu.ubb.cs.idde.osgi</groupId>
+		<artifactId>lab4-ktim1347_szulo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+	<groupId>edu.ubb.cs.idde.osgi</groupId>
+	<artifactId>lab4-ktim1347_fogyaszto</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+
+	<name>lab4-ktim1347_fogyaszto Bundle</name>
+	<description>lab4-ktim1347_fogyaszto OSGi bundle project.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>lab4-ktim1347_interface</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.4.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Activator>edu.ubb.cs.idde.osgi.fogyaszto.Activator</Bundle-Activator>
+						<Export-Package>edu.ubb.cs.idde.osgi.fogyaszto*;version=${project.version}</Export-Package>
+						<Import-Package>edu.ubb.cs.idde.osgi.interfesz,*;resolution:=optional</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id> copy-to-karaf</id>
+						<goals>
+							<goal>
+                                run
+                            </goal>
+						</goals>
+						<phase> install </phase>
+						<configuration>
+							<target name="karafdeploy">
+								<copy
+									file="${project.build.directory}/${project.build.finalName}.jar"
+									todir="${karafdeploy}" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+
+			</plugin>
+			<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+		</plugins>
+	</build>
+
+</project>
