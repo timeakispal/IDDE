@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RcpExample
+Bundle-SymbolicName: RcpExample;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: edu.ubb.cs.idde.rcp.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.osgi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: mysql-connector-java-5.1.37-bin.jar,
+ ojdbc6.jar,
+ .
